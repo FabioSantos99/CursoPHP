@@ -23,7 +23,7 @@ include_once("data/categories.php");
 <body>
    <header>
     <a href="<?= $BASE_URL ?>" id="logo">
-    <img src="<? $BASE_URL ?>img/logo.svg" alt="Blog Codar">
+    <img src="<? $BASE_URL ?>new-logo.jpg" alt="Blog Codar">
     </a>
 
     <nav>
