@@ -7,7 +7,6 @@ $db = "curso_php";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
-
 // ASSUNTO DA AULA
 
 $nome = "Sofá";
