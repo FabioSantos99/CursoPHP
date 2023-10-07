@@ -21,8 +21,8 @@ foreach($fabio as $carac => $value) {
 
 echo "<br>";
 
-foreach($alexia as $value) {
+foreach($alexia as $carac => $value) {
 
-    echo "$value <br>";
+    echo "$carac => $value <br>";
 
 }
