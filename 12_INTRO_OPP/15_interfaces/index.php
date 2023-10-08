@@ -1,7 +1,7 @@
 <?php
 
 interface Caracteristicas {
-    
+
     const nome = "Fabio";
     public function falar();
 
