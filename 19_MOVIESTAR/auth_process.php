@@ -1,55 +1,69 @@
 <?php
 
-require_once("db.php");
-require_once("globals.php");
-require_once("models/User.php");
-require_once("models/Message.php");
-require_once("dao/UserDAO.php");
+  require_once("db.php");
+  require_once("globals.php");
+  require_once("models/User.php");
+  require_once("models/Message.php");
+  require_once("dao/UserDAO.php");
 
-$message = new Message($BASE_URL);
-$userDao = new UserDAO($conn, $BASE_URL);
+  $message = new Message($BASE_URL);
+  $userDao = new UserDAO($conn, $BASE_URL);
 
-// Verificando o tipo de formulário
-$type = filter_input(INPUT_POST, "type");
+  // Verificando o tipo do formulário
+  $type = filter_input(INPUT_POST, "type");
 
-//verificação do tipo de formulário
-if ($type === "register") {
+  // Verificação do tipo de formulário
+  if($type === "register") {
 
-    //Recebendo os inputs do formulário
+    // Recebendo os inputs do formulário
     $name = filter_input(INPUT_POST, "name");
     $lastname = filter_input(INPUT_POST, "lastname");
-    $email = filter_input(INPUT_POST, "email");
+    $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
     $password = filter_input(INPUT_POST, "password");
-    $confirmpassword = filter_input(INPUT_POST, "confirmpassword");
+    $confirmPassword = filter_input(INPUT_POST, "confirmpassword");
 
-    // verificação de dados minimos
+    // Verificação de campos necessários para registro
     if($name && $lastname && $email && $password) {
 
-        if($password === $confirmpassword) {
+      // Verificar se as senhas são iguais
+      if($password === $confirmPassword) {
 
-            //verificar se o email esta cadastrado no sistema
-            if($userDao->findByEmail($email)=== false) {
+        if($userDao->findByEmail($email) === false) {
+          $user = new User();
 
-                echo "Nenhum usuário foi encontrado!";
+          //Criaçao de token e senha
+          $userToken = $user->generateToken();
+          $finalPassword = $user->generatePassword($password);
 
-            } else {
-                $message->setMessage("Usuario já cadastrado, tente outro email.", "error", "back");
-            }
+          $user->name = $name;
+          $user->lastname = $lastname;
+          $user->email = $email;
+          $user->password = $finalPassword;
+          $user->token = $userToken;
 
+          $auth = true;
+
+          $userDao->create($user, $auth);
+          
         } else {
 
-            $message->setMessage("As senhas não são iguais,", "error", "back");
+          $message->setMessage("Usuário já cadastrado, tente outro e-mail.", "error", "auth.php");
+
         }
+
+      } else {
+
+        $message->setMessage("As senhas não são iguais.", "error", "auth.php");
+
+      }
 
     } else {
 
-        //enviar uma msg de erro, de dados faltantes
-        $message->setMessage("Por favor, preencha todos os campos", "error", "back");
+      $message->setMessage("Por favor, preencha todos os campos.", "error", "auth.php");
 
     }
 
-
-} else if($type === "login") {
-
+  // Fazer o login do usuário
+  } else if($type === "login") {
 
 }

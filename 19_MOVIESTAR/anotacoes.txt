@@ -1,0 +1,12 @@
+criar diagrama e banco de dados relacionando login, videos e comentários
+
+Montar site, header e footer fixo em todas as páginas
+
+criar banco de dados/ db.php
+
+base url 
+
+template de mensagem <php if  ?> ------ php endif; ?>
+
+pagina de autenticação -> formularios
+
