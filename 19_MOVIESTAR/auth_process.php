@@ -28,12 +28,14 @@
       // Verificar se as senhas são iguais
       if($password === $confirmPassword) {
 
+        // Verificar se usuário já existe
         if($userDao->findByEmail($email) === false) {
+
           $user = new User();
 
-          //Criaçao de token e senha
+          // Criar token e senha
           $userToken = $user->generateToken();
-          $finalPassword = $user->generatePassword($password);
+          $finalPassword = password_hash($password, PASSWORD_DEFAULT);
 
           $user->name = $name;
           $user->lastname = $lastname;
@@ -44,7 +46,7 @@
           $auth = true;
 
           $userDao->create($user, $auth);
-          
+
         } else {
 
           $message->setMessage("Usuário já cadastrado, tente outro e-mail.", "error", "auth.php");
@@ -66,4 +68,23 @@
   // Fazer o login do usuário
   } else if($type === "login") {
 
-}
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password',);
+
+    // Se conseguir autenticar, mensagem de sucesso
+    if($userDao->authenticateUser($email, $password)) {
+
+      $message->setMessage("Seja bem-vindo!", "success", "editprofile.php");
+
+    // Caso não autenticar, redireciona para a página de auth com erro
+    } else {
+
+      $message->setMessage("Usuário e/ou senha incorretos!", "error", "auth.php");
+
+    }
+
+  } else {
+
+    $message->setMessage("Informações inválidas, tente novamente.", "error", "index.php");
+
+  }

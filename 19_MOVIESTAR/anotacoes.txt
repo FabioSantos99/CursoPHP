@@ -10,3 +10,19 @@ template de mensagem <php if  ?> ------ php endif; ?>
 
 pagina de autenticação -> formularios
 
+usuarios -> models -> Users next  interface USERDAOINTERFACE
+
+UserDao - > $stmt->rowCount() > 0 / verificar se há usuário caso contrario false
+
+Message -> set Message(), getMessage(), clearMessage()
+
+
+ir para logout
+
+
+login do usuario mudar redirect igual a true no arquivo Users->function-> update
+
+
+
+
+ 

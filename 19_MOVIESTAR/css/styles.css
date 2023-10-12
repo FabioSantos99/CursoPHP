@@ -85,12 +85,51 @@
 
 
    /* HOME */
-   #main-container {
+#main-container {
     background-color: black;
     min-height: 65vh;
     padding: 40px;
     color: white;
    }
+
+   #profile-image-container,
+.profile-image-container {
+  width: 150px;
+  height: 150px;
+  border: 6px solid #F5C518;
+  border-radius: 100%;
+  background-size: cover;
+  background-position: center;
+  margin: 15px auto;
+}
+
+.profile-image-container {
+  width: 70px;
+  height: 70px;
+}
+
+.page-description {
+  color: #999;
+}
+
+#bio {
+  max-width: 400px;
+}
+
+.form-control.disabled {
+  background-color: #BBB;
+}
+
+#change-password-container {
+  margin-top: 30px;
+}
+
+.edit-profile-page .card-btn,
+#add-movie-container .card-btn,
+#review-form .card-btn,
+#edit-movie-form .card-btn {
+  width: auto;
+}
 
 
    /* LOGIN/REGISTER */
@@ -173,4 +212,36 @@
 
 #footer-links-container {
   margin: 30px 0;
+}
+
+/* Edit Profile */
+#profile-image-container {
+  width: 150px;
+  height: 150px;
+  border: 6px solid #f5c518;
+  border-radius: 100%;
+  background-size: cover;
+  background-position: center;
+  margin: 15px auto;
+}
+
+#profile-image-container.review-image {
+  width: 80px;
+  height: 80px;
+}
+
+.page-description {
+  color: #332121;
+}
+
+#bio {
+  max-width: 400px;
+}
+
+.disabled {
+  background-color: #614b4b !important;
+}
+
+#change-password-container {
+  margin-top: 30px;
 }
