@@ -23,6 +23,7 @@ ir para logout
 login do usuario mudar redirect igual a true no arquivo Users->function-> update
 
 
+Criar adição de filmes
 
 
  

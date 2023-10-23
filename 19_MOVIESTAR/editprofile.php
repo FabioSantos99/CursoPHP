@@ -11,7 +11,7 @@
   // Verifica o token, se não for o correto redireciona para a home
   $auth = new UserDAO($conn, $BASE_URL);
 
-  $userData = $auth->verifyToken();
+  $userData = $auth->verifyToken(true);
 
   $fullName = $userModel->getFullName($userData);
 
@@ -20,7 +20,7 @@
   }
 
 ?>
-  <div id="main-container" class="container-fluid">
+  <div id="main-container" class="container-fluid edit-profile-page">
     <div class="col-md-12">
       <form action="<?= $BASE_URL ?>user_process.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="type" value="update">
@@ -40,7 +40,7 @@
               <label for="email">E-mail:</label>
               <input type="email" class="form-control disabled" id="email" name="email" placeholder="Digite seu e-mail" readonly value="<?= $userData->email ?>">
             </div>
-            <input type="submit" class="btn form-btn" value="Alterar">
+            <input type="submit" class="btn card-btn" value="Alterar">
           </div>
           <div class="col-md-4">
             <div id="profile-image-container" style="background-image: url('<?= $BASE_URL ?>img/users/<?= $userData->image ?>')"></div>
@@ -70,7 +70,7 @@
               <label for="confirmpassword">Confirmação de senha:</label>
               <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirme a sua senha">
             </div>
-            <input type="submit" class="btn form-btn" value="Alterar Senha">
+            <input type="submit" class="btn card-btn" value="Alterar Senha">
           </form>
         </div>
       </div> 

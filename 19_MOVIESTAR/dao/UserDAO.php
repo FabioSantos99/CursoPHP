@@ -27,9 +27,8 @@
       $user->image = $data["image"];
       $user->bio = $data["bio"];
       $user->token = $data["token"];
-
+  
       return $user;
-
     }
 
     public function create(User $user, $authUser = false) {
@@ -84,7 +83,7 @@
       
     }
 
-    public function changePassword($user) {
+    public function changePassword(User $user) {
 
       $stmt = $this->conn->prepare("UPDATE users SET 
         password = :password
@@ -97,7 +96,7 @@
       $stmt->execute();
         
       // Redireciona e apresenta mensagem de sucesso
-      $this->message->setMessage("Senha atualizada!", "success", "editprofile.php");
+      $this->message->setMessage("Senha alterada com sucesso!", "success", "editprofile.php");
       
     }
 
