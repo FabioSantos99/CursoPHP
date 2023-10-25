@@ -56,7 +56,7 @@
 
     }
 
-    public function update(User $user) {
+    public function update(User $user, $redirect = true) {
 
       $stmt = $this->conn->prepare("UPDATE users SET 
         name = :name,
@@ -162,7 +162,7 @@
 
     }
 
-    public function verifyToken($protected = true) {
+    public function verifyToken($protected = false) {
 
       
       if(!empty($_SESSION["token"])) {

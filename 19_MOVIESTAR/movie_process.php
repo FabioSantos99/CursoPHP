@@ -7,19 +7,21 @@ require_once("models/Message.php");
 require_once("dao/UserDAO.php");
 require_once("dao/MovieDAO.php");
 
-$type = filter_input(INPUT_POST, "type");
 
 $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
-
 $movieDao = new MovieDAO($conn, $BASE_URL);
 
 // Resgata o tipo do formulário
 
+$type = filter_input(INPUT_POST, "type");
+
+//REsgata dados do usuário
 $userData = $userDao->verifyToken();
 
 if ($type === "create") {
 
+    //Receber od dados dos inputs
     $title = filter_input(INPUT_POST, "title");
     $description = filter_input(INPUT_POST, "description");
     $trailer = filter_input(INPUT_POST, "trailer");
@@ -29,7 +31,9 @@ if ($type === "create") {
     $movie = new Movie();
 
     // Validação minima de dados
-    if(!empty($title) && !empty($description) && !empty($category)) {
+    if(!empty($title)
+     && !empty($description)
+     && !empty($category)) {
 
         $movie->title = $title;
         $movie->description = $description;
@@ -57,7 +61,7 @@ if ($type === "create") {
             }
 
             //Gerando o nome da imagem
-            $imageName = $movie->imageGenerateName();
+            $imageName = $movie->generateImageName();
 
             imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
 

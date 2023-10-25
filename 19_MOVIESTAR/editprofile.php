@@ -6,14 +6,14 @@
   require_once("models/User.php");
   require_once("dao/UserDAO.php");
 
-  $userModel = new User();
+  $user = new User();
 
   // Verifica o token, se não for o correto redireciona para a home
   $auth = new UserDAO($conn, $BASE_URL);
 
   $userData = $auth->verifyToken(true);
 
-  $fullName = $userModel->getFullName($userData);
+  $fullName = $user->getFullName($userData);
 
   if($userData->image == "") {
     $userData->image = "user.png";
@@ -29,7 +29,7 @@
             <h1><?= $fullName ?></h1>
             <p class="page-description">Altere seus dados no formulário abaixo:</p>
             <div class="form-group">
-              <label for="name">Nome</label>
+              <label for="name" class="mb-2">Nome</label>
               <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome" value="<?= $userData->name ?>">
             </div>
             <div class="form-group">
