@@ -302,7 +302,7 @@ body {
 
   /* Dashboard */
 #add-movie-container {
-    text-align: right;
+    text-align: left;
   }
   
   #movies-dashboard .table {
@@ -318,7 +318,7 @@ body {
   }
   
   .table-movie-title {
-    color: #FFF;
+    color: black;
     font-weight: bold;
     transition: .5s;
   }
