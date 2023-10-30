@@ -49,7 +49,7 @@
           $imageFile = imagecreatefrompng($image["tmp_name"]);
         }
 
-        $imageName = $user->imageGenerateName();
+        $imageName = $user->generateImageName();
 
         imagejpeg($imageFile, "./img/users/".$imageName, 100);
 
@@ -69,11 +69,7 @@
     // Recebendo os inputs do formulário
     $password = filter_input(INPUT_POST, "password");
     $confirmPassword = filter_input(INPUT_POST, "confirmpassword"); 
-    // $id = filter_input(INPUT_POST, "id");
-
-    $userData = $userDao->verifyToken();
-
-    $id = $userData->id;
+    $id = filter_input(INPUT_POST, "id");
     
     if($password == $confirmPassword) {
 

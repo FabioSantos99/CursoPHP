@@ -1,9 +1,10 @@
 <?php
-define("x", "5");
 
-$x = x + 10;
-echo x;
 
-$rest = substr("abcdef", -1);
+date_default_timezone_set("America/Sao_Paulo");
 
-echo $rest;
+$data = new DateTime();
+
+print_r($data);
+
+echo "<br>";

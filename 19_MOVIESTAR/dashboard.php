@@ -12,11 +12,10 @@ $user = new User();
 $userDao = new UserDao($conn, $BASE_URL);
 $movieDao = new MovieDAO($conn, $BASE_URL);
 
-
 $userData = $userDao->verifyToken(true);
+
 $userMovies = $movieDao->getMoviesByUserId("$userData->id");
 
-// print_r($userMovies);
 
 ?>
 
@@ -24,7 +23,7 @@ $userMovies = $movieDao->getMoviesByUserId("$userData->id");
   <h2 class="section-title">Dashboard</h2>
   <p class="section-description">Adicione ou atualize as informações dos filmes que você enviou</p>
   <div class="col-md-12" id="add-movie-container">
-    <a href="<?= $BASE_URL ?>" class="btn form-btn">
+    <a href="<?= $BASE_URL ?>newmovie.php" class="btn form-btn">
     <i class="fas fa-plus"></i> Adicionar Filme
     </a>
   </div>
@@ -40,11 +39,11 @@ $userMovies = $movieDao->getMoviesByUserId("$userData->id");
         <?php foreach($userMovies as $movie): ?>
         <tr>
           <td scope="row"><?= $movie->id ?></td>
-          <td><a href="<?= $BASE_URL ?>movie.php?id=<?= $movie->id ?>" class="table-movie-title"><?= $movie->id ?></a></td>
-          <td><i class="fas fa-star"></i> 9</td>
+          <td><a href="<?= $BASE_URL ?>movie.php?id=<?= $movie->id ?>" class="table-movie-title"><?= $movie->title ?></a></td>
+          <td><i class="fas fa-star"></td>
           <td class="actions-column">
-            <a href="<?= $BASE_URL ?>movie.php?id=<?= $movie->id ?>" class="edit-btn"><i class="far fa-edit"></i>Editar</a>
-            <form action="<?= $BASE_URL ?>movie_process.php">
+            <a href="<?= $BASE_URL ?>editmovie.php?id=<?= $movie->id ?>" class="edit-btn"><i class="far fa-edit"></i>Editar</a>
+            <form action="<?= $BASE_URL ?>movie_process.php" method="POST">
             <input type="hidden" name="type" value="delete">
             <input type="hidden" name="id" value="<?= $movie->id ?>">
               <button type="submit" class="delete-btn">

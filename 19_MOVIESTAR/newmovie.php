@@ -7,9 +7,11 @@
   require_once("dao/UserDAO.php");
 
   // Verifica o token, se não for o correto redireciona para a home
-  $auth = new UserDAO($conn, $BASE_URL);
 
-  $userData = $auth->verifyToken();
+  $user = new User();
+  $userDao = new UserDAO($conn, $BASE_URL);
+
+  $userData = $userDao->verifyToken(true);
 
 ?>
 <div id="main-container" class="container-fluid">

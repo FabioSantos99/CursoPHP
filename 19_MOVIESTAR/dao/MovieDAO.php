@@ -59,6 +59,7 @@ public function __construct(PDO $conn, $url) {
    public function getMoviesByCategory($category) {
 
     $movies = [];
+
     $stmt = $this->conn->prepare("SELECT * FROM movies WHERE category = :category ORDER BY id DESC");
 
     $stmt->bindParam(":category", $category);
@@ -66,6 +67,7 @@ public function __construct(PDO $conn, $url) {
     $stmt->execute();
 
     if( $stmt->rowCount() > 0) {
+
         $moviesArray = $stmt->fetchAll();
 
         foreach($moviesArray as $movie) {
@@ -78,6 +80,7 @@ public function __construct(PDO $conn, $url) {
    public function getMoviesByUserId($id) {
 
     $movies = [];
+
     $stmt = $this->conn->prepare("SELECT * FROM movies WHERE users_id = :users_id");
 
     $stmt->bindParam(":users_id", $id);
@@ -138,10 +141,40 @@ public function __construct(PDO $conn, $url) {
     $this->message->setMessage("Filme adicionado com sucesso", "success", "index.php");
 
    }
-   public function update(MOvie $movie) {
+   public function update(Movie $movie) {
+
+    $stmt = $this->conn->prepare("UPDATE movies SET 
+    title = :title,
+    description = :description,
+    image = :image,
+    category = :category,
+    trailer = :trailer,
+    length = :length
+    WHERE id = :id
+    ");
+
+    $stmt->bindParam(":title", $movie->title);
+    $stmt->bindParam(":description", $movie->description);
+    $stmt->bindParam(":image", $movie->image);
+    $stmt->bindParam(":category", $movie->category);
+    $stmt->bindParam(":trailer", $movie->trailer);
+    $stmt->bindParam(":length", $movie->length);
+    $stmt->bindParam(":id", $movie->id);
+
+    $stmt->execute();
+    $this->message->setMessage("Filme atualizado com sucesso!", "success","dashboard.php");
 
    }
    public function destroy($id) {
+
+    $stmt = $this->conn->prepare("DELETE FROM movies WHERE id = :id");
+
+    $stmt->bindParam(":id", $id);
+
+    $stmt->execute();
+
+    //Mensagem de sucesso por remover filme
+    $this->message->setMessage("Filme removido com sucesso!", "success","dashboard.php");
 
    }
 
