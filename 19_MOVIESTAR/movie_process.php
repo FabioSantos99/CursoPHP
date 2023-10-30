@@ -57,7 +57,7 @@ if ($type === "create") {
             }
 
             //Gerando o nome da imagem
-            $imageName = $movie->generateImageName();
+            $imageName = $movie->imageGenerateName();
 
             imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
 
@@ -149,7 +149,7 @@ if ($type === "create") {
                 //Gerando o nome da imagem
                 $movie = new Movie();
 
-                $imageName = $movie->generateImageName();
+                $imageName = $movie->imageGenerateName();
     
                 imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
     

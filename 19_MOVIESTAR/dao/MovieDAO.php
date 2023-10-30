@@ -100,7 +100,8 @@ public function __construct(PDO $conn, $url) {
    public function findById($id) {
 
     
-    $movies = [];
+    $movie = [];
+
     $stmt = $this->conn->prepare("SELECT * FROM movies WHERE id = :id");
 
     $stmt->bindParam(":id", $id);
@@ -115,7 +116,9 @@ public function __construct(PDO $conn, $url) {
         return $movie;
 
      } else {
+
         return false;
+
      }
    }
    public function findByTitle($title) {
@@ -123,7 +126,10 @@ public function __construct(PDO $conn, $url) {
    }
    public function create(Movie $movie) {
 
-    $stmt = $this->conn->prepare("INSERT INTO movies(title, description, image, trailer, category, length, users_id) VALUES(
+    $stmt = $this->conn->prepare("INSERT INTO 
+    movies(
+        title, description, image, trailer, category, length, users_id) VALUES (
+            
         :title, :description, :image, :trailer, :category, :length, :users_id
     )");
 
