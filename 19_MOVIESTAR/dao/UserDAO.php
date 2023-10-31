@@ -36,7 +36,7 @@
       $stmt = $this->conn->prepare("INSERT INTO users (
         name, lastname, email, password, token
       ) VALUES (
-        :name, :lastname, :email, :password, :token
+        :name, :lastname, :email,:password, :token
       )");
 
       $stmt->bindParam(":name", $user->name);
@@ -250,6 +250,8 @@
           return false;
         }
 
+      } else {
+        return false;
       }
 
     }
