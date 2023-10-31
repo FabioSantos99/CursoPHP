@@ -1,10 +1,10 @@
 <?php
 
 
-require_once("models/Review.php");
-require_once("models/Message.php");
+include_once("models/Review.php");
+include_once("models/Message.php");
 
-require_once("dao/UserDAO.php");
+include_once("dao/UserDAO.php");
 
 class ReviewDao implements ReviewDAOInterface {
     private $conn;
@@ -25,9 +25,9 @@ class ReviewDao implements ReviewDAOInterface {
         $reviewObject->id = $data["id"];
         $reviewObject->rating = $data["rating"];
         $reviewObject->review = $data["review"];
-        $reviewObject->users_id = $data["users-id"];
+        $reviewObject->users_id = $data["users_id"];
         $reviewObject->movies_id = $data["movies_id"];
-
+  
         return $reviewObject;
         
 
@@ -43,9 +43,9 @@ class ReviewDao implements ReviewDAOInterface {
     
         $stmt->bindParam(":rating", $review->rating);
         $stmt->bindParam(":review", $review->review);
-        $stmt->bindParam(":movies_id", $review->movies_id);
         $stmt->bindParam(":users_id", $review->users_id);
-        
+        $stmt->bindParam(":movies_id", $review->movies_id);
+    
     
         $stmt->execute();
 
@@ -54,6 +54,25 @@ class ReviewDao implements ReviewDAOInterface {
 
     }
     public function getMoviesReview($id) {
+
+        $reviews = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM reviews WHERE movies_id = :movies_id");
+
+        $stmt->bindParam(":movies_id", $id);
+
+        $stmt->execute();
+
+        if( $stmt->rowCount() > 0) {
+            $reviewsData = $stmt->fetchAll();
+
+            foreach($reviewsData as $review) {
+                $reviews[] = $this->buildReview($reviewsData);
+
+            }
+        
+         }
+         return $reviews;
 
     }
     public function hasAlreadyReviewed($id, $userId) {

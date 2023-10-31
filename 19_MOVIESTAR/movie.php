@@ -13,7 +13,6 @@
 
   $movieDao = new MovieDAO($conn, $BASE_URL);
 
-  $reviewDao = new ReviewDAO($conn, $BASE_URL);
 
   if(empty($id)) {
 
@@ -48,8 +47,17 @@
 
 }
 
-//Resgatar as reviews do filme
-$alreadyReviewed = false;
+//Resgarar as reviews do filme
+$reviewDao = new ReviewDAO($conn, $BASE_URL);
+
+$movieReviews = $reviewDao->getMoviesReview($id);
+
+// Só faz estas checagens se o usuário estiver logado
+if(!empty($userData)) {
+  // Verifica se já fez review
+  $alreadyReviewed = $reviewDao->hasAlreadyReviewed($id, $userData->id);
+}
+
 
 ?>
 
@@ -63,9 +71,11 @@ $alreadyReviewed = false;
         <span><?= $movie->category ?></span>
         <span class="pipe"></span>
       </p>
-      <iframe src="<?= $movie->trailer ?>" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encryted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encryted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <p><?= $movie->description ?></p>
     </div>
+
+    <!-- <?= $movie->trailer ?> -->
     <div class="col-md-4">
       <div class="movie-image-container" style="background-image: url('<?= $BASE_URL ?>/img/movies/<?= $movie->image ?>')"></div>
     </div>
@@ -100,6 +110,13 @@ $alreadyReviewed = false;
           <input type="submit" class="btn card-btn" value="Enviar comentário">
         </form>
       </div>
+      <!-- Comentário -->
+      <?php foreach($movieReviews as $review): ?>
+
+        <?php require("templates/user_review.php"); ?>
+        <p class="empty-list">Não há comentário para este filme ainda</p>
+
+      <?php endforeach; ?>
     </div>
   </div>
 
