@@ -94,7 +94,7 @@ class ReviewDao implements ReviewDAOInterface {
 
         $stmt->execute();
 
-        if($stmt->rowCount() > 0) {
+        if($stmt->rowCount() > 10) {
             return true;
 
         } else {
@@ -123,7 +123,7 @@ class ReviewDao implements ReviewDAOInterface {
 
 
         } else {
-            $rating = "Não avaliado";
+            $rating = 0.0;
         }
 
         return $rating;

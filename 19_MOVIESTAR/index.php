@@ -12,6 +12,8 @@
 
   $comedyMovies = $movieDao->getMoviesByCategory("Comédia");
 
+  $dramaMovies = $movieDao->getMoviesByCategory("Drama");
+
 ?>
   <div id="main-container" class="container-fluid">
     <h2 class="section-title">Filmes novos</h2>
@@ -41,6 +43,17 @@
         <?php require("templates/movie_card.php"); ?>
       <?php endforeach; ?>
       <?php if(count($comedyMovies) === 0): ?>
+        <p class="empty-list">Ainda não há filmes de comédia cadastrados!</p>
+      <?php endif; ?>
+    </div>
+
+    <h2 class="section-title">Drama</h2>
+    <p class="section-description">Veja os melhores filmes de drama</p>
+    <div class="movies-container">
+      <?php foreach($dramaMovies as $movie): ?>
+        <?php require("templates/movie_card.php"); ?>
+      <?php endforeach; ?>
+      <?php if(count($dramaMovies) === 0): ?>
         <p class="empty-list">Ainda não há filmes de comédia cadastrados!</p>
       <?php endif; ?>
     </div>

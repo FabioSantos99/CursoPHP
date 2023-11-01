@@ -241,8 +241,10 @@
 }
 
 /* Profile */
+
 .profile-container {
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
 }
 
 .profile-container .profile-image {
@@ -341,7 +343,7 @@
 }
 
 .review {
-  padding: 20px 0;
+  padding: 40px 0;
   border-bottom: 1px solid #333;
 }
 
@@ -359,10 +361,8 @@
 
 /* Dashboard */
 #add-movie-container {
-  text-align: left;
   border: none;
   border-radius: 10px;
-  background-color: #F5C518;  
 }
 
 #add-movie-container btn:hover {

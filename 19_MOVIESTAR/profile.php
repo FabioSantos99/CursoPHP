@@ -65,7 +65,7 @@ $userMovies = $movieDao->getMoviesByUserId($id);
                     <p class="profile-description">O usuário ainda não escreveu nada aqui...</p>
                 <?php endif; ?>
             </div>
-            <div class="col-md-12 added-movies-container">
+            <div class="col-md-12 added-movies-container d-flex justify-space-around">
                 <h3>Filme que enviou:</h3>
                 <?php foreach($userMovies as $movie): ?>
                     <?php require("templates/movie_card.php"); ?>

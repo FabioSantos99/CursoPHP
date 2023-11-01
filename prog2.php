@@ -1,27 +1,9 @@
 <?php
 
-class Caminhao {
+$a = 4;
 
-    public $marca;
-    public $cor;
-    public $velMaxima;
+$b = 7;
 
-    function setVelMaxima($vel) {
-        $this->velMaxima = $vel;
-    }
+$c = 4/7;
 
-    function getVelMaxima() {
-
-        echo "A velocidade máxima deste caminhão à: $this->velMaxima km/h <br>";
-
-    }
-}
-
-$mercedez = new Caminhao;
-
-$mercedez->cor = "preto";
-$mercedez->marca = "Mercedez";
-$mercedez->setvelMaxima(200);
-$mercedez->getVelMaxima();
-
-
+echo  number_format($c,2);

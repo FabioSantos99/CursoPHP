@@ -69,7 +69,7 @@
   } else if($type === "login") {
 
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password',);
+    $password = filter_input(INPUT_POST, 'password');
 
     // Se conseguir autenticar, mensagem de sucesso
     if($userDao->authenticateUser($email, $password)) {

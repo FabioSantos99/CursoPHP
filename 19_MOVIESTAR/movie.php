@@ -66,7 +66,7 @@
         <span class="pipe"></span>
         <span><?= $movie->category ?></span>
         <span class="pipe"></span>
-        <span><i class="fas fa-star"></i><?= $movie->rating ?></span>
+        <span><i class="fas fa-star"></i><?= number_format($movie->rating,1) ?></span>
       </p>
       <iframe width="560" height="315" src="<?= $movie->trailer ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <p><?= $movie->description ?></p>
