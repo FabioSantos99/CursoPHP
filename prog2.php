@@ -1,9 +1,26 @@
 <?php
 
-$a = 4;
+function isPrime($num){
+    
+    if ($num < 2) {
+        
+        return false;
 
-$b = 7;
+    }
+        
+    for ($i = 2; $i <= sqrt($num); $i++) {
+        
+        if($num % $i == 0) {
 
-$c = 4/7;
+            return false;
 
-echo  number_format($c,2);
+        }
+    
+    }
+    
+    return true;
+}
+
+$result = isPrime(6);
+
+echo $result;
